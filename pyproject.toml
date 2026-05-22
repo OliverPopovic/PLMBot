@@ -1,0 +1,20 @@
+[project]
+name = "plmbot"
+version = "0.1.0"
+description = "Minimal PLM CRUD and relational retrieval prototype"
+requires-python = ">=3.11"
+dependencies = [
+  "sqlalchemy>=2.0",
+  "psycopg[binary]>=3.2",
+  "pydantic>=2.8",
+  "alembic>=1.13",
+  "langchain>=0.3",
+  "langchain-openai>=0.2",
+  "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.2", "ruff>=0.6"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
