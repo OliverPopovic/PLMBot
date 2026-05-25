@@ -7,6 +7,24 @@ class BomService:
     def __init__(self, session):
         self.session = session
 
+    def list_assemblies(self) -> dict:
+        rows = self.session.scalars(select(Assembly).order_by(Assembly.assembly_code)).all()
+        return {
+            "status": "success",
+            "operation": "list_assemblies",
+            "summary": f"Listed {len(rows)} assemblies",
+            "records": [
+                {
+                    "assembly_code": assembly.assembly_code,
+                    "name": assembly.name,
+                    "description": assembly.description,
+                }
+                for assembly in rows
+            ],
+            "evidence": ["ordered_assembly_scan"],
+            "warnings": [],
+        }
+
     def get_bom(self, assembly_code: str) -> dict:
         assembly = self.session.scalar(select(Assembly).where(Assembly.assembly_code == assembly_code))
         if not assembly:

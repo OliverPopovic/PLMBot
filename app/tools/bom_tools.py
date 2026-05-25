@@ -1,5 +1,10 @@
 from app.services.bom_service import BomService
-from app.tools.schemas import GetBomInput, WhereUsedInput
+from app.tools.schemas import GetBomInput, ListAssembliesInput, WhereUsedInput
+
+
+def list_assemblies_tool(service: BomService, payload: dict) -> dict:
+    ListAssembliesInput(**payload)
+    return service.list_assemblies()
 
 
 def get_bom_tool(service: BomService, payload: dict) -> dict:

@@ -1,5 +1,10 @@
 from app.services.component_service import ComponentService
-from app.tools.schemas import CreateComponentInput, DeleteComponentInput, FindComponentInput, UpdateComponentInput
+from app.tools.schemas import CreateComponentInput, DeleteComponentInput, FindComponentInput, ListComponentsInput, UpdateComponentInput
+
+
+def list_components_tool(service: ComponentService, payload: dict) -> dict:
+    ListComponentsInput(**payload)
+    return service.list_components()
 
 
 def find_component_tool(service: ComponentService, payload: dict) -> dict:

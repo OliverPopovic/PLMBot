@@ -1,19 +1,31 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
-class FindComponentInput(BaseModel):
+class StrictSchema(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+
+class FindComponentInput(StrictSchema):
     component_code_or_name: str = Field(min_length=1)
 
 
-class GetBomInput(BaseModel):
+class ListComponentsInput(StrictSchema):
+    pass
+
+
+class ListAssembliesInput(StrictSchema):
+    pass
+
+
+class GetBomInput(StrictSchema):
     assembly_code: str
 
 
-class WhereUsedInput(BaseModel):
+class WhereUsedInput(StrictSchema):
     component_code: str
 
 
-class CreateComponentInput(BaseModel):
+class CreateComponentInput(StrictSchema):
     component_code: str
     name: str
     component_type: str
@@ -22,10 +34,10 @@ class CreateComponentInput(BaseModel):
     attributes_json: dict = {}
 
 
-class UpdateComponentInput(BaseModel):
+class UpdateComponentInput(StrictSchema):
     component_code: str
     patch: dict
 
 
-class DeleteComponentInput(BaseModel):
+class DeleteComponentInput(StrictSchema):
     component_code: str

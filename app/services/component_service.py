@@ -9,6 +9,17 @@ class ComponentService:
     def __init__(self, session):
         self.session = session
 
+    def list_components(self) -> dict:
+        rows = self.session.scalars(select(Component).order_by(Component.component_code)).all()
+        return {
+            "status": "success",
+            "operation": "list_components",
+            "summary": f"Listed {len(rows)} components",
+            "records": [self._row(component) for component in rows],
+            "evidence": ["ordered_component_scan"],
+            "warnings": [],
+        }
+
     def find_component(self, query: str) -> dict:
         exact = self.session.scalar(select(Component).where(Component.component_code == query))
         if exact:

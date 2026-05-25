@@ -32,5 +32,26 @@ This repository implements a minimal local prototype for PLM-style CRUD + relati
    docker compose run --rm app python -m app.cli
    ```
 
+## CLI Usage
+The CLI now accepts plain-English requests or explicit commands.
+
+Examples:
+```text
+find R-14
+list components
+list assemblies
+show me the BOM for A-1000
+list all components inside assembly A-1000
+where is C-102 used?
+create {"component_code":"IC-555","name":"Timer IC","component_type":"ic"}
+update IC-555 {"description":"555 timer"}
+delete IC-555
+```
+
+Behavior:
+- Read operations execute immediately after the app shows the interpreted instruction.
+- Write operations show the normalized instruction and require `y` or `yes` confirmation.
+- Unsupported or ambiguous requests are rejected with a clarification or safety message.
+
 ## Project Layout
 See the `app/` tree for agent, tools, services, db, seed, and tests.
