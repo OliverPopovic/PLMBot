@@ -15,19 +15,22 @@ This repository implements a minimal local prototype for PLM-style CRUD + relati
    ```bash
    cp .env.example .env
    ```
-2. Start Postgres:
+2. Fill in local-only values in `.env`:
+   - `POSTGRES_PASSWORD`
+   - `OPENAI_API_KEY`
+3. Start Postgres:
    ```bash
    docker compose up -d db
    ```
-3. Run migrations:
+4. Run migrations:
    ```bash
    docker compose run --rm app alembic upgrade head
    ```
-4. Seed data:
+5. Seed data:
    ```bash
    docker compose run --rm app python -m app.seed.seed_runner
    ```
-5. Start CLI:
+6. Start CLI:
    ```bash
    docker compose run --rm app python -m app.cli
    ```
